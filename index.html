@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Interactive Website</title>
+  <title>3D Interactive Portfolio</title>
   <link rel="stylesheet" href="style.css"> <!-- Link to your external CSS -->
+
 </head>
 <body>
 
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar-container">
-      <a href="#home" class="navbar-logo">3D Models</a>
+      <a href="#home" class="navbar-logo"> Hanz Pacheco </a>
       <ul class="navbar-links">
         <li><a href="#models">Models</a></li>
         <li><a href="#about">About</a></li>
@@ -20,35 +21,38 @@
     </div>
   </nav>
 
-  <!-- Main Title -->
-  <div class="title" id="home">Interactive 3D Website</div>
-  
-  <!-- Wrapper to contain all spline viewers -->
-  <div class="spline-container-wrapper" id="models">
-    <!-- Spline Viewer 1 -->
-    <div class="spline-container">
-      <button class="fullscreen-btn">⛶</button> <!-- Fullscreen button -->
-      <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.73/build/spline-viewer.js"></script>
-      <spline-viewer class="spline-viewer" url="https://prod.spline.design/5KKMU8PiIUi0Kwu0/scene.splinecode"></spline-viewer>
+<br>
+<br>
+
+
+ <!-- Main Title -->
+ <div class="title" id="home">Interactive 3D Website</div>
+
+  <!-- Note Container -->
+  <div class="note-container">Welcome to my website! This interactive portfolio is designed to showcase my best work as a 3D artist. Here, you’ll find a collection of my finest environment and asset designs, brought to life through interactive 3D models.</div>
+ 
+  <!-- Wrapper to contain all Sketchfab viewers -->
+  <div class="sketchfab-container-wrapper" id="models">
+    <!-- Sketchfab Viewer 1 -->
+    <div class="sketchfab-container">
+      <button class="fullscreen-btn">⛶</button>
+      <iframe title="Stylized retro office computer" class="sketchfab-viewer" style="width: 100%; height: 600px;" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/b00fc24c019c4833aacc00ad86330e99/embed?ui_theme=dark"> </iframe>
     </div>
 
-    <!-- Spline Viewer 2 -->
-    <div class="spline-container">
+    <!-- Sketchfab Viewer 2 -->
+    <div class="sketchfab-container">
       <button class="fullscreen-btn">⛶</button>
-      <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.73/build/spline-viewer.js"></script>
-      <spline-viewer class="spline-viewer" url="https://prod.spline.design/your-second-scene/scene.splinecode"></spline-viewer>
+      <iframe title="3D Model" class="sketchfab-viewer" style="width: 100%; height: 600px;" src="https://sketchfab.com/models/your-second-model/embed" frameborder="0" allow="autoplay; fullscreen; vr" allowfullscreen></iframe>
     </div>
 
-    <!-- Spline Viewer 3 -->
-    <div class="spline-container">
+    <!-- Sketchfab Viewer 3 -->
+    <div class="sketchfab-container">
       <button class="fullscreen-btn">⛶</button>
-      <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.73/build/spline-viewer.js"></script>
-      <spline-viewer class="spline-viewer" url="https://prod.spline.design/your-third-scene/scene.splinecode"></spline-viewer>
+      <iframe title="3D Model" class="sketchfab-viewer" style="width: 100%; height: 600px;" src="https://sketchfab.com/models/your-third-model/embed" frameborder="0" allow="autoplay; fullscreen; vr" allowfullscreen></iframe>
     </div>
   </div>
 
   <script>
-    // Function to toggle full screen
     function toggleFullScreen(viewer) {
       if (!document.fullscreenElement) {
         viewer.requestFullscreen().catch(err => {
@@ -59,33 +63,11 @@
       }
     }
 
-    // Attach event listeners to full-screen buttons
     document.querySelectorAll(".fullscreen-btn").forEach((btn, index) => {
       btn.addEventListener("click", () => {
-        const viewer = document.querySelectorAll(".spline-viewer")[index];
+        const viewer = document.querySelectorAll(".sketchfab-viewer")[index];
         toggleFullScreen(viewer);
       });
-    });
-
-    // Prevent scrolling when inside Spline viewer
-    document.querySelectorAll("spline-viewer").forEach(viewer => {
-      viewer.addEventListener("mouseenter", () => {
-        document.body.style.overflow = "hidden"; 
-      });
-
-      viewer.addEventListener("mouseleave", () => {
-        document.body.style.overflow = "auto"; 
-      });
-
-      viewer.addEventListener("wheel", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-      }, { passive: false });
-
-      viewer.addEventListener("touchmove", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-      }, { passive: false });
     });
   </script>
 
