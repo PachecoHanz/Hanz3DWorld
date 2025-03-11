@@ -2,6 +2,89 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+  background: url('images/background2.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #ffffff;
+}
+
+/* Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  padding: 10px 20px;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navbar-logo, .navbar-links a {
+  font-size: 1.2rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+}
+
+.navbar-links li {
+  margin: 0 15px;
+}
+
+.navbar-links a:hover {
+  color: #43788f;
+}
+
+/* Main Title */
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 80px;
+  color: rgb(228, 227, 227);
+}
+
+/* Note Container */
+.note-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  max-width: 800px;
+  text-align: center;
+  color: rgb(201, 199, 199);
+}
+
+/* Gallery Section */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 40px auto;
+  max-width: 1200px;
+}
+
+.gallery-item {
+  width: 200px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Reset body styles */
+body {
+  margin: 0;
+  padding: 0;
   font-family: courier, Helvetica, sans-serif;
   background-color: #111;
   color: #fff;
@@ -163,3 +246,41 @@ body {
 .sketchfab-viewer:hover {
   opacity: 5;
 }
+
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    display: flex;
+    gap: 15px;
+  }
+
+  .footer-links li {
+    display: inline;
+  }
+
+  .footer-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: #ccc;
+  }
