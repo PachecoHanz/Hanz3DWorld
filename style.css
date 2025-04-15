@@ -1,9 +1,10 @@
-/* Reset body styles */
+/* Reset and Base Styles */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Courier New', Courier, monospace;
   background-color: black;
+  background-size: cover;
   color: #ffffff;
 }
 
@@ -13,7 +14,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(35, 63, 200, 0.5);
+  background-color: rgba(85, 85, 85, 0.5);
   z-index: 1000;
   padding: 10px 20px;
 }
@@ -49,111 +50,155 @@ body {
 }
 
 .navbar-links a:hover {
-  color: #43788f;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Courier New', Courier, monospace;
-  background: url('images/pilipinas.png') no-repeat center center fixed;
-  background-size: cover;
   color: #ffffff;
 }
 
-/* Title Section */
-.title-container {
-  position: relative;
-  width: 100%;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+/* Hero Section */
+.hero {
   text-align: center;
-  overflow: hidden;
-  margin-top: -100px;
-  padding: 0;
-  top: 0;
-}
-
-.title-bg {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-}
-
-/* Adding black overlay */
-.title-container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: -1;
-}
-
-.title {
-  position: relative;
-  font-size: 2rem;
-  margin-top: 140px;
-  color: rgb(228, 227, 227);
-  z-index: 1;
-}
-
-.note-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-  max-width: 800px;
-  text-align: center;
-  color: rgb(201, 199, 199);
-  padding: 10px;
-  z-index: 1;
-}
-
-/* Gallery Section */
-.gallery-container {
-  padding: 40px;
-  text-align: center;
+  margin-top: 40px;
 }
 
 .gallery-title {
   font-size: 2.5rem;
+  margin-bottom: 10px;
   color: #fff;
-  margin-bottom: 30px;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+.hero p {
+  color: #ccc;
+  max-width: 700px;
+  margin: auto;
+  font-size: 1rem;
 }
 
-.gallery-item {
-  background-color: #333;
-  border-radius: 10px;
+/* Model Switcher */
+.model-switcher {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.model-switcher button {
+  background-color: #222;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.model-switcher button:hover {
+  background-color: #444;
+}
+
+/* Spline Wrapper */
+.spline-wrapper {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  margin-top: 60px;
   overflow: hidden;
+}
+
+.spline-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.spline-wrapper::before,
+.spline-wrapper::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.spline-wrapper::before {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+}
+
+.spline-wrapper::after {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+}
+
+@media screen and (max-width: 768px) {
+  .spline-wrapper {
+    height: 45vh;
+  }
+}
+
+/* Viewer Container */
+.viewer-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 40px 20px 60px;
+  background-color: rgba(40, 40, 40, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+  overflow: hidden;
+  height: 520px;
+}
+
+/* Sketchfab Viewers with Animation */
+.sketchfab-viewer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 20px;
+  background-color: #1a1a1a;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.98);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sketchfab-viewer.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
   position: relative;
 }
 
-.sketchfab-viewer {
+.viewer-container::before,
+.viewer-container::after {
+  content: "";
+  position: absolute;
   width: 100%;
-  height: 300px;
-  border-radius: 10px;
+  height: 40px;
+  left: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.viewer-container::before {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.viewer-container::after {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
 }
 
 /* Footer */
 .footer {
-  background-color: rgba(35, 63, 200, 0.5);
+  background-color: rgba(85, 85, 85, 0.5);
   color: white;
   padding: 20px 0;
   text-align: center;
