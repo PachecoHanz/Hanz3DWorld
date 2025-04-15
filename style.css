@@ -50,7 +50,7 @@ body {
 }
 
 .navbar-links a:hover {
-  color: #ffffff;
+  color: #444444;
 }
 
 /* Hero Section */
@@ -94,6 +94,55 @@ body {
 .model-switcher button:hover {
   background-color: #444;
 }
+ 
+
+
+
+/* Spline Hero Section with Fade */
+ .spline-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin-top: 80px;
+  overflow: hidden;
+}
+
+.spline-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.spline-wrapper::before,
+.spline-wrapper::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.spline-wrapper::before {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+}
+
+.spline-wrapper::after {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+}
+
+@media screen and (max-width: 768px) {
+  .spline-wrapper {
+    height: 45vh;
+  }
+}
+
+
+
 
 /* Spline Wrapper */
 .spline-wrapper {
@@ -142,11 +191,11 @@ body {
 .viewer-container {
   position: relative;
   max-width: 1000px;
-  margin: 60px auto;
-  padding: 40px 20px 60px;
-  background-color: rgba(40, 40, 40, 0.9);
+  margin: 40px auto;
+  padding: 40px 02px 60px;
+  background-color: rgba(44, 44, 44, 0.9);
   border-radius: 20px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+  box-shadow: 0 0 45px rgba(0,0,0,0.6);
   overflow: hidden;
   height: 520px;
 }
@@ -232,5 +281,5 @@ body {
 }
 
 .footer-links a:hover {
-  color: #ccc;
+  color: #444444;
 }

@@ -5,190 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>3D Interactive Portfolio</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Spline Hero Section with Fade */
-    .spline-wrapper {
-      position: relative;
-      width: 100%;
-      height: 60vh;
-      margin-top: 60px;
-      overflow: hidden;
-    }
 
-    .spline-iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    .spline-wrapper::before,
-    .spline-wrapper::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 40px;
-      pointer-events: none;
-      z-index: 10;
-    }
-
-    .spline-wrapper::before {
-      top: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-    }
-
-    .spline-wrapper::after {
-      bottom: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    }
-
-    @media screen and (max-width: 768px) {
-      .spline-wrapper {
-        height: 45vh;
-      }
-    }
-
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .gallery-title {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      color: #fff;
-    }
-
-    .hero p {
-      color: #ccc;
-      max-width: 700px;
-      margin: auto;
-      font-size: 1rem;
-    }
-
-    /* Model Switcher */
-    .model-switcher {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 30px 0;
-      flex-wrap: wrap;
-    }
-
-    .model-switcher button {
-      background-color: #222;
-      border: 1px solid #444;
-      color: #fff;
-      padding: 10px 15px;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-
-    .model-switcher button:hover {
-      background-color: #444;
-    }
-
-    /* Viewer Container */
-    .viewer-container {
-      position: relative;
-      max-width: 1000px;
-      margin: 60px auto;
-      padding: 40px 20px 60px;
-      background-color: rgba(40, 40, 40, 0.9);
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.6);
-      overflow: hidden;
-      height: 520px;
-    }
-
-    .sketchfab-viewer {
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 20px;
-      background-color: #1a1a1a;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-      opacity: 0;
-      visibility: hidden;
-      transform: scale(0.98);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .sketchfab-viewer.active {
-      opacity: 1;
-      visibility: visible;
-      transform: scale(1);
-      position: relative;
-    }
-
-    .viewer-container::before,
-    .viewer-container::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 40px;
-      left: 0;
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    .viewer-container::before {
-      top: 0;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
-    }
-
-    .viewer-container::after {
-      bottom: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-    }
-
-    /* Footer */
-    .footer {
-      background-color: rgba(85, 85, 85, 0.5);
-      color: white;
-      padding: 20px 0;
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .footer-links {
-      list-style: none;
-      padding: 0;
-      margin-top: 10px;
-      display: flex;
-      gap: 15px;
-    }
-
-    .footer-links li {
-      display: inline;
-    }
-
-    .footer-links a {
-      color: white;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: #ccc;
-    }
-  </style>
-</head>
-<body>
 
   <!-- Navbar -->
   <nav class="navbar">
@@ -221,6 +38,8 @@
     <button onclick="showModel(0)">Model 1</button>
     <button onclick="showModel(1)">Model 2</button>
     <button onclick="showModel(2)">Model 3</button>
+    <button onclick="showModel(3)">Model 4</button>
+    <button onclick="showModel(4)">Model 5</button>
   </div>
 
   <!-- 3D Model Viewers -->
@@ -229,6 +48,10 @@
 
     <iframe class="sketchfab-viewer" src="https://sketchfab.com/models/a36f4cfff56e4f7697aa5fb34bca1f69/embed" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
 
+    <iframe class="sketchfab-viewer" src="https://sketchfab.com/models/08c2325218a34d9cbd68b88ae6180422/embed" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
+
+    <iframe class="sketchfab-viewer" src="https://sketchfab.com/models/08c2325218a34d9cbd68b88ae6180422/embed" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
+    
     <iframe class="sketchfab-viewer" src="https://sketchfab.com/models/08c2325218a34d9cbd68b88ae6180422/embed" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
   </div>
 
