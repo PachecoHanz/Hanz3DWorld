@@ -1,14 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Artist Statement - Hanz Pacheco</title>
-  <link rel="stylesheet" href="style.css"> <!-- Link to your external CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* === Spline Background Styling === */
+    .spline-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .spline-bg-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: none;
+    }
+
+    .dark-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+    .artist-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+}
+
+.artist-statement {
+  max-width: 800px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4); /* optional: helps text pop against bg */
+  padding: 30px;
+  border-radius: 10px;
+  color: white;
+}
+
+    /* === Footer Styling === */
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      color: white;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    h3 {
+      color: white;
+    }
+  </style>
 </head>
 <body>
+  <!-- Spline Background and Overlay -->
+  <div class="spline-background">
+    <iframe src="https://my.spline.design/legendarywaves-Hkl5pPEwiU8mknAKc6TPC3yc/" class="spline-bg-iframe"></iframe>
+    <div class="dark-overlay"></div>
+  </div>
 
-  <!-- Navbar -->
+  <!--Navbar -->
   <nav class="navbar">
     <div class="navbar-container">
       <a href="index.html" class="navbar-logo">Hanz Pacheco</a>
@@ -20,53 +98,55 @@
     </div>
   </nav>
 
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+  <!-- Spacer for fixed navbar -->
+  <div style="height: 80px;"></div>
 
-
-  
-<div class="row section">
-  <header id="header" class="twelve columns" style="text-align: center;">
-    <h3>Artist Statement</h3>
-    <div class="statement_text">
-    </div>
-  </header>
+  <br>
+  <br>
+  <!--Section Header -->
+  <div class="row section">
+    <header id="header" class="twelve columns" style="text-align: center;">
+      <h3>Artist Statement</h3>
+      <div class="statement_text"></div>
+    </header>
+  </div>
 </div>
 
-
-  <!-- Artist Statement Section -->
- <div class="artist-section" style="display: flex; align-items: center; justify-content: center; margin-top: 20px; gap: 30px;">
-  <!-- Artist Statement -->
-  <div class="artist-statement" style="max-width: 60%; font-size: 1rem; line-height: 1.6; text-align: left;">
-    <p>
-      This Net Art projects is a website that lets people explore my 3D art in a way that wouldn’t be possible in any other medium. 
-      Instead of just looking at pictures, users can interact with my models—rotating, zooming, and viewing them from all angles. 
-      This makes the experience more engaging and brings my environment and asset designs to life.
-    </p>
-    <p>Technically, the website is built with HTML and CSS for structure and style, while JavaScript adds interactivity by allowing users to view models in fullscreen mode. 
-      The site is also responsive, meaning it works well on different screen sizes, so anyone can access it easily. I use Iframe as you advice on Canvas. I'm using a lot of iframes and I use sketchfab as the main source to let users preview my 3D art through the site.   <p>
+  <!--Artist Statement -->
+  <div class="artist-section">
+    <div class="artist-statement" style="max-width: 60%; font-size: 1rem; line-height: 1.6; text-align: left;">
     
-    
-        <p>This project works best on the internet because it takes full advantage of web technology. A physical portfolio or a printed image wouldn’t allow people to move and explore 3D models in real-time. 
-          The dark-themed design of the website helps keep the focus on the artwork, while the simple layout makes navigation easy. <p>
-    
-                
-                
-  <p> Overall, this project is more than just a collection of my work—it’s a space where people can truly experience my 3D art interactively. 
-                  The internet allows me to share my creations in a way that is both dynamic and engaging, making this portfolio a unique and immersive showcase of my skills.<p>
+      <p>
+        This portfolio website is designed as a digital space where my 3D work in environment and asset design can be explored in an immersive and interactive way. 
+        Rather than presenting static images, I wanted to create a site where visitors can directly engage with my models—rotating, zooming, and navigating through them in real-time. 
+        This level of interaction reflects how 3D art is meant to be experienced: dynamically, from all angles.
+      </p>
+      <p>
+        Built using HTML, CSS, and JavaScript, the site integrates Sketchfab and Spline embeds to bring my 3D models to life on the web.
+         Iframes allow for seamless previews, while custom styling and a dark-themed layout help spotlight the work itself. The homepage features a floating particle planet that sets the tone for the rest of the site—one that blends creativity, interactivity, and clean presentation.
+      </p>
+      <p>
+        This project was made specifically for the internet because it takes full advantage of what the web can offer: accessibility, responsiveness, and real-time interaction. 
+        Unlike a traditional printed portfolio, this site adapts to different screens and allows users to move between different 3D works using a custom-built viewer switcher—turning the website into a living gallery.
+      </p>
+      <p>
+        Overall, Hanz3DWorld isn't just a portfolio—it's an evolving virtual space that reflects both my artistic identity and technical growth as a 3D artist.
+      </p>
+    </div>
+  </div>
+</div>
 
- 
-
-  
-                  </div>
-                  <br>
-                  <br>
-                  <br>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p>&copy; 2024 Hanz Pacheco. All Rights Reserved.</p>
+      <ul class="footer-links">
+        <li><a href="https://www.linkedin.com/in/hanz-pacheco-774638155" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:17pacheco28@gmail.com">Email Me</a></li>
+        <li><a href="./prj1.html">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
 
 </body>
 </html>
-
