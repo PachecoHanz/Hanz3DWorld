@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>3D Interactive Portfolio</title>
   <link rel="stylesheet" href="style.css" />
-
+</head>
+<body>
 
   <!-- Navbar -->
   <nav class="navbar">
@@ -21,8 +22,8 @@
 
   <!-- Spline Hero Embed with Faded Top and Bottom -->
   <div class="spline-wrapper">
-    <iframe class="spline-iframe"
-      src="https://my.spline.design/particleplanet-kDcT8JQuGnkW5dbv6ghPlIr6/"
+    <iframe id="splineScene" class="spline-iframe"
+      src="https://my.spline.design/blackabstractart-nPaLAzxE7m8JWjbZdoa4jBoK/"
       allow="autoplay; fullscreen; xr-spatial-tracking"
       allowfullscreen></iframe>
   </div>
@@ -75,7 +76,26 @@
         viewer.classList.toggle('active', i === index);
       });
     }
+
+    const splineIframe = document.getElementById("splineScene");
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Play when visible
+          splineIframe.contentWindow.postMessage({ action: "play" }, "*");
+        } else {
+          // Pause when not visible
+          splineIframe.contentWindow.postMessage({ action: "pause" }, "*");
+        }
+      });
+    }, {
+      threshold: 0.1 // Trigger when 10% is visible
+    });
+
+    observer.observe(splineIframe);
   </script>
 
 </body>
 </html>
+
