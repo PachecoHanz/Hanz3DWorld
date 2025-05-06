@@ -20,7 +20,7 @@
     </div>
   </nav>
 
-  <!-- Spline Hero Embed with Faded Top and Bottom -->
+  <!-- Spline Hero Embed -->
   <div class="spline-wrapper">
     <iframe id="splineScene" class="spline-iframe"
       src="https://my.spline.design/blackabstractart-nPaLAzxE7m8JWjbZdoa4jBoK/"
@@ -32,9 +32,6 @@
     <h1>Explore My 3D Models</h1>
     <p>Click a button below to view different 3D models.</p>
   </div>
-  
-  <div class="spline-brand-mask"></div>
-  
 
   <!-- Model Switcher -->
   <div class="model-switcher">
@@ -58,6 +55,33 @@
     <iframe class="sketchfab-viewer" src="https://sketchfab.com/models/e313f32b8ef54efcaebd0f909b7dda6c/embed" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
   </div>
 
+  <div class="model-description">
+    <h2>
+      About This Model
+      <button class="toggle-description">Hide Description</button>
+    </h2>
+    <p id="description-text">Your description here...</p>
+  </div>
+
+  <!-- Comment Section -->
+  <div class="comment-section">
+    <h2>Comments & Suggestions</h2>
+    <button id="toggle-comments" class="toggle-button">Hide Comments</button>
+    
+    <form id="comment-form">
+      <div class="comment-input">
+        <div class="avatar-circle" id="user-avatar">U</div>
+        <div class="input-group">
+          <input type="text" id="name" name="name" placeholder="Your Name" required />
+          <textarea id="comment" name="comment" placeholder="Add a public comment..." rows="3" required></textarea>
+          <button type="submit">Comment</button>
+        </div>
+      </div>
+    </form>
+
+    <div id="comments-display" class="comments-list"></div>
+  </div>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
@@ -72,30 +96,117 @@
 
   <!-- JavaScript -->
   <script>
+    const modelDescriptions = [
+      "Model 1: A sci-fi crate designed in Blender, showcasing hard surface modeling and custom materials.",
+      "Model 2: A stylized forest rock asset using procedural texturing and real-time shaders.",
+      "Model 3: A low-poly ruin arch optimized for mobile/VR, featuring clean UVs and AO bake.",
+      "Model 4: A futuristic generator made with trimsheets and emissive detailing.",
+      "Model 5: A realistic prop study of industrial machinery with high-res textures and HDRI lighting."
+    ];
+
     function showModel(index) {
       const viewers = document.querySelectorAll('.sketchfab-viewer');
       viewers.forEach((viewer, i) => {
         viewer.classList.toggle('active', i === index);
       });
+
+      const desc = document.getElementById("description-text");
+      desc.style.opacity = 0;
+      setTimeout(() => {
+        desc.textContent = modelDescriptions[index];
+        desc.style.opacity = 1;
+      }, 200);
     }
 
-    const splineIframe = document.getElementById("splineScene");
+    showModel(0); // Default view
 
+// Toggle description visibility
+const descContainer = document.querySelector(".model-description");
+const toggleBtn = document.querySelector(".toggle-description");
+
+toggleBtn.addEventListener("click", () => {
+  descContainer.classList.toggle("collapsed");
+  toggleBtn.textContent = descContainer.classList.contains("collapsed")
+    ? "Show Description"
+    : "Hide Description";
+});
+
+// Spline scene visibility
+    const splineIframe = document.getElementById("splineScene");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Play when visible
           splineIframe.contentWindow.postMessage({ action: "play" }, "*");
         } else {
-          // Pause when not visible
           splineIframe.contentWindow.postMessage({ action: "pause" }, "*");
         }
       });
-    }, {
-      threshold: 0.1 // Trigger when 10% is visible
+    }, { threshold: 0.1 });
+    observer.observe(splineIframe);
+
+    // Comment system
+    const commentForm = document.getElementById('comment-form');
+    const commentList = document.getElementById('comments-display');
+    const toggleButton = document.getElementById('toggle-comments');
+    let storedComments = JSON.parse(localStorage.getItem('comments')) || [];
+    storedComments.forEach(comment => renderComment(comment));
+
+    toggleButton.addEventListener('click', () => {
+      if (commentList.style.display === 'none') {
+        commentList.style.display = 'flex';
+        toggleButton.textContent = 'Hide Comments';
+      } else {
+        commentList.style.display = 'none';
+        toggleButton.textContent = 'Show Comments';
+      }
     });
 
-    observer.observe(splineIframe);
+    commentForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const text = document.getElementById('comment').value.trim();
+      const timestamp = new Date().toLocaleString();
+
+      if (name && text) {
+        const comment = { name, text, time: timestamp, likes: 0 };
+        storedComments.push(comment);
+        localStorage.setItem('comments', JSON.stringify(storedComments));
+        renderComment(comment);
+        commentForm.reset();
+      }
+    });
+
+    function renderComment({ name, text, time, likes }) {
+      const commentBox = document.createElement('div');
+      commentBox.className = 'comment-box';
+
+      const avatar = document.createElement('div');
+      avatar.className = 'comment-avatar';
+      avatar.textContent = name[0].toUpperCase();
+
+      const content = document.createElement('div');
+      content.className = 'comment-content';
+      content.innerHTML = `
+        <strong>${name}</strong>
+        <p>${text}</p>
+        <small>${time}</small>
+        <div class="like-row">
+          <button class="like-btn">👍 ${likes}</button>
+        </div>
+      `;
+
+      const likeButton = content.querySelector('.like-btn');
+      likeButton.addEventListener('click', () => {
+        const index = Array.from(commentList.children).indexOf(commentBox);
+        storedComments[index].likes++;
+        localStorage.setItem('comments', JSON.stringify(storedComments));
+        likeButton.textContent = `👍 ${storedComments[index].likes}`;
+      });
+
+      commentBox.appendChild(avatar);
+      commentBox.appendChild(content);
+      commentList.appendChild(commentBox);
+    }
   </script>
 
 </body>
