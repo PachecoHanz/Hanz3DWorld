@@ -33,13 +33,22 @@
     <p>Click a button below to view different 3D models.</p>
   </div>
 
-  <!-- Model Switcher -->
   <div class="model-switcher">
-    <button onclick="showModel(0)">Model 1</button>
-    <button onclick="showModel(1)">Model 2</button>
-    <button onclick="showModel(2)">Model 3</button>
-    <button onclick="showModel(3)">Model 4</button>
-    <button onclick="showModel(4)">Model 5</button>
+    <button onclick="showModel(0)">
+      <img src="icons/computer.png" alt="Model 1" class="model-icon">
+    </button>
+    <button onclick="showModel(1)">
+      <img src="icons/radio.png" alt="Model 2" class="model-icon">
+    </button>
+    <button onclick="showModel(2)">
+      <img src="icons/fridge.png" alt="Model 3" class="model-icon">
+    </button>
+    <button onclick="showModel(3)">
+      <img src="icons/treasure.png" alt="Model 4" class="model-icon">
+    </button>
+    <button onclick="showModel(4)">
+      <img src="icons/chair.png" alt="Model 5" class="model-icon">
+    </button>
   </div>
 
   <!-- 3D Model Viewers -->
@@ -97,19 +106,19 @@
   <!-- JavaScript -->
   <script>
     const modelDescriptions = [
-      "Model 1: A sci-fi crate designed in Blender, showcasing hard surface modeling and custom materials.",
-      "Model 2: A stylized forest rock asset using procedural texturing and real-time shaders.",
-      "Model 3: A low-poly ruin arch optimized for mobile/VR, featuring clean UVs and AO bake.",
-      "Model 4: A futuristic generator made with trimsheets and emissive detailing.",
-      "Model 5: A realistic prop study of industrial machinery with high-res textures and HDRI lighting."
+      "Model 1: This retro computer machine was modeled in Blender and textured using Substance Painter and Photoshop for the texture and decals. I've been exploring new 3D modeling workflows and techniques. This low-poly model consists of approximately 12,000 triangles and 7,000 vertices. While I'm still getting the hang of Substance Painter, I'm confident that with more practice, my texturing skills will improve significantly. I’m excited about pushing my skills further to create even better textures in the future.",
+      "Model 2: This old radio was modeled in Blender and textured using Substance Painter and Photoshop. I created my own version with a vintage, retro aesthetic that I like. The polycount is very low, with about 8k tris, so you can notice some of the edges. However, I tried to make up for it with the texture work. Feel free to share any advice on improving my textures!",
+      "Model 3: This old fridge was modeled in Blender and textured using Substance Painter and Photoshop for the textures and decals. I've wanted to model a Fallout-style fridge for a while, and I'm really happy with how it turned out. I did my best to keep the polycount low, with a total of 12k tris, while maintaining as much detail as possible.",
+      "Model 4: This is an old wooden treasure box modeled in Blender and textured using Substance Painter.",
+      "Model 5: This is an old wooden chair modeled in Blender and textured using Substance Painter."
     ];
-
+    
     function showModel(index) {
       const viewers = document.querySelectorAll('.sketchfab-viewer');
       viewers.forEach((viewer, i) => {
         viewer.classList.toggle('active', i === index);
       });
-
+    
       const desc = document.getElementById("description-text");
       desc.style.opacity = 0;
       setTimeout(() => {
@@ -117,40 +126,46 @@
         desc.style.opacity = 1;
       }, 200);
     }
-
+    
     showModel(0); // Default view
-
-// Toggle description visibility
-const descContainer = document.querySelector(".model-description");
-const toggleBtn = document.querySelector(".toggle-description");
-
-toggleBtn.addEventListener("click", () => {
-  descContainer.classList.toggle("collapsed");
-  toggleBtn.textContent = descContainer.classList.contains("collapsed")
-    ? "Show Description"
-    : "Hide Description";
-});
-
-// Spline scene visibility
+    
+    // Toggle description
+    const descContainer = document.querySelector(".model-description");
+    const toggleBtn = document.querySelector(".toggle-description");
+    toggleBtn.addEventListener("click", () => {
+      descContainer.classList.toggle("collapsed");
+      toggleBtn.textContent = descContainer.classList.contains("collapsed")
+        ? "Show Description"
+        : "Hide Description";
+    });
+    
+    // Spline visibility
     const splineIframe = document.getElementById("splineScene");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          splineIframe.contentWindow.postMessage({ action: "play" }, "*");
-        } else {
-          splineIframe.contentWindow.postMessage({ action: "pause" }, "*");
-        }
+        splineIframe.contentWindow.postMessage({ action: entry.isIntersecting ? "play" : "pause" }, "*");
       });
     }, { threshold: 0.1 });
     observer.observe(splineIframe);
-
-    // Comment system
+    
+    // COMMENT SYSTEM
     const commentForm = document.getElementById('comment-form');
     const commentList = document.getElementById('comments-display');
     const toggleButton = document.getElementById('toggle-comments');
+    
     let storedComments = JSON.parse(localStorage.getItem('comments')) || [];
-    storedComments.forEach(comment => renderComment(comment));
-
+    
+    // Check if user already commented
+    const hasCommented = localStorage.getItem('hasCommented') === 'true';
+    if (hasCommented) {
+      commentForm.querySelector('button[type="submit"]').disabled = true;
+      commentForm.querySelector('button[type="submit"]').textContent = 'You already commented';
+    }
+    
+    // Render existing comments
+    storedComments.forEach((comment, idx) => renderComment(comment, idx));
+    
+    // Toggle comments visibility
     toggleButton.addEventListener('click', () => {
       if (commentList.style.display === 'none') {
         commentList.style.display = 'flex';
@@ -160,30 +175,50 @@ toggleBtn.addEventListener("click", () => {
         toggleButton.textContent = 'Show Comments';
       }
     });
-
+    
+    // Forbidden words list
+    const forbiddenWords = ['nigga', 'nigger', 'Nigga', 'Nigger', 'fuck', 'Fuck', ' fuck you', 'Fuck you', 'FUCK YOU', 'FUCK U','fuck you','fuck u' , 'FUCKER', 'Fucker' ,'FUCKING', 'Fucking','shit','SHIT','gay','GAY', 'G@Y', 'g@y', 'Fag','FAG', 'Faggot', 'FAGGOT', 'Kill', 'KILL', 'Hitler', 'HITLER', '666', 'Hate','HATE', 'Hate you', 'HATE YOU', 'Chink', 'CHINK', 'ISIS', 'isis']; // replace with real words
+    
+    // Add comment
     commentForm.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (localStorage.getItem('hasCommented') === 'true') return;
+    
       const name = document.getElementById('name').value.trim();
       const text = document.getElementById('comment').value.trim();
       const timestamp = new Date().toLocaleString();
-
+    
+      // Check for forbidden words (case-insensitive)
+      const containsBadWord = forbiddenWords.some(word =>
+        text.toLowerCase().includes(word.toLowerCase()) ||
+        name.toLowerCase().includes(word.toLowerCase())
+      );
+    
+      if (containsBadWord) {
+        alert('Your comment contains inappropriate language. Please revise it.');
+        return;
+      }
+    
       if (name && text) {
         const comment = { name, text, time: timestamp, likes: 0 };
         storedComments.push(comment);
         localStorage.setItem('comments', JSON.stringify(storedComments));
-        renderComment(comment);
+        localStorage.setItem('hasCommented', 'true');
+        commentForm.querySelector('button[type="submit"]').disabled = true;
+        commentForm.querySelector('button[type="submit"]').textContent = 'You already commented';
+        renderComment(comment, storedComments.length - 1);
         commentForm.reset();
       }
     });
-
-    function renderComment({ name, text, time, likes }) {
+    
+    function renderComment({ name, text, time, likes }, index) {
       const commentBox = document.createElement('div');
       commentBox.className = 'comment-box';
-
+    
       const avatar = document.createElement('div');
       avatar.className = 'comment-avatar';
       avatar.textContent = name[0].toUpperCase();
-
+    
       const content = document.createElement('div');
       content.className = 'comment-content';
       content.innerHTML = `
@@ -192,23 +227,45 @@ toggleBtn.addEventListener("click", () => {
         <small>${time}</small>
         <div class="like-row">
           <button class="like-btn">👍 ${likes}</button>
+          <button class="delete-btn">🗑️ Delete</button>
         </div>
       `;
-
+    
+      // Like button → only once per computer
       const likeButton = content.querySelector('.like-btn');
+      const likeKey = `liked_${index}`;
+      if (localStorage.getItem(likeKey) === 'true') {
+        likeButton.disabled = true;
+        likeButton.textContent = `👍 ${likes} (Liked)`;
+      }
       likeButton.addEventListener('click', () => {
-        const index = Array.from(commentList.children).indexOf(commentBox);
-        storedComments[index].likes++;
-        localStorage.setItem('comments', JSON.stringify(storedComments));
-        likeButton.textContent = `👍 ${storedComments[index].likes}`;
+        if (!localStorage.getItem(likeKey)) {
+          storedComments[index].likes++;
+          localStorage.setItem('comments', JSON.stringify(storedComments));
+          localStorage.setItem(likeKey, 'true');
+          likeButton.disabled = true;
+          likeButton.textContent = `👍 ${storedComments[index].likes} (Liked)`;
+        }
       });
-
+    
+      // Delete button → deletes comment (and clears user flag)
+      const deleteButton = content.querySelector('.delete-btn');
+      deleteButton.addEventListener('click', () => {
+        storedComments.splice(index, 1);
+        localStorage.setItem('comments', JSON.stringify(storedComments));
+        localStorage.removeItem('hasCommented');
+        commentList.innerHTML = ''; // clear list
+        storedComments.forEach((c, i) => renderComment(c, i)); // re-render
+        commentForm.querySelector('button[type="submit"]').disabled = false;
+        commentForm.querySelector('button[type="submit"]').textContent = 'Comment';
+      });
+    
       commentBox.appendChild(avatar);
       commentBox.appendChild(content);
       commentList.appendChild(commentBox);
     }
-  </script>
-
+    </script>
+    
 </body>
 </html>
 

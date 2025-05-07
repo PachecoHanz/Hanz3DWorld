@@ -128,17 +128,21 @@ body {
 }
 
 .model-switcher button {
-  background-color: #222;
-  border: 1px solid #444;
-  color: #fff;
-  padding: 10px 15px;
+  background: none;
+  border: none;
+  padding: 5px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background 0.3s;
 }
 
-.model-switcher button:hover {
-  background-color: #444;
+.model-switcher .model-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.model-switcher .model-icon:hover {
+  transform: scale(1.1);
 }
 
 /* Spline Hero Section with Fade */
