@@ -450,3 +450,72 @@ body {
 .footer-links a:hover {
   color: #00ffff;
 }
+
+/* 🖼️ Center the gallery content */
+.gallery-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* 🖼️ Center the main-gallery buttons and image */
+.main-gallery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* increased spacing */
+}
+
+/* 🖼️ Make gallery image bigger */
+.gallery-photo {
+  max-width: 50%;  /* previously 70% → increased */
+  border-radius: 12px;
+}
+
+/* 🖼️ Make arrow buttons slightly larger */
+.arrow-btn {
+  font-size: 0.5rem; /* optional: increase arrow size */
+}
+
+/* 🖼️ Thumbnails center and spacing */
+.thumbnail-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: -31px;  /* ✅ negative margin pulls it up closer */
+}
+.thumbnail-row img {
+  width: 60px;  /* slightly larger thumbnails */
+  height: 60px;
+}
+.download-button {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0 10px 40px;
+}
+
+.download-button a,
+.download-button .share-btn {
+  background-color: transparent;  /* no fill */
+  color: #00ffff;                 /* cyan text */
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: none;               /* no shadow initially */
+  transition: box-shadow 0.3s, color 0.3s;
+  border: 1px solid #00ffff;      /* optional border */
+  cursor: pointer;
+}
+
+.download-button a:hover,
+.download-button .share-btn:hover {
+  box-shadow: 0 0 15px #00ffff;   /* glow on hover */
+  color: white;
+  background-color: transparent;   /* still no background */
+}

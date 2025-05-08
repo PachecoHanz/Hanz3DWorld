@@ -8,75 +8,79 @@
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="navbar-container">
-      <a href="#home" class="navbar-logo"> Hanz Pacheco </a>
-      <ul class="navbar-links">
-        <li><a href="index.html">Models</a></li>
-        <li><a href="prj2.html">Artist Statement</a></li>
-        <li><a href="prj1.html">About</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Spline Hero Embed -->
-  <div class="spline-wrapper">
-    <iframe id="splineScene" class="spline-iframe"
-      src="https://my.spline.design/blackabstractart-nPaLAzxE7m8JWjbZdoa4jBoK/"
-      allow="autoplay; fullscreen; xr-spatial-tracking"
-      allowfullscreen></iframe>
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <a href="#home" class="navbar-logo"> Hanz Pacheco </a>
+    <ul class="navbar-links">
+      <li><a href="index.html">Models</a></li>
+      <li><a href="prj2.html">Artist Statement</a></li>
+      <li><a href="prj1.html">About</a></li>
+    </ul>
   </div>
-  
-  <div class="spline-overlay-text">
-    <h1>Explore My 3D Models</h1>
-    <p>Click a button below to view different 3D models.</p>
+</nav>
+
+<!-- Spline Hero Embed -->
+<div class="spline-wrapper">
+  <iframe id="splineScene" class="spline-iframe"
+    src="https://my.spline.design/blackabstractart-nPaLAzxE7m8JWjbZdoa4jBoK/"
+    allow="autoplay; fullscreen; xr-spatial-tracking"
+    allowfullscreen></iframe>
+</div>
+
+<div class="spline-overlay-text">
+  <h1>Explore My 3D Models</h1>
+  <p>Click a button below to view different 3D models.</p>
+</div>
+
+<div class="model-switcher">
+  <button onclick="showModel(0)"><img src="icons/computer.png" class="model-icon"></button>
+  <button onclick="showModel(1)"><img src="icons/radio.png" class="model-icon"></button>
+  <button onclick="showModel(2)"><img src="icons/fridge.png" class="model-icon"></button>
+  <button onclick="showModel(3)"><img src="icons/treasure.png" class="model-icon"></button>
+  <button onclick="showModel(4)"><img src="icons/chair.png" class="model-icon"></button>
+</div>
+
+<!-- 3D Model Viewers -->
+<div class="viewer-container" id="viewer-container">
+  <iframe class="sketchfab-viewer active" src="https://sketchfab.com/models/b00fc24c019c4833aacc00ad86330e99/embed?ui_theme=dark" allowfullscreen></iframe>
+  <iframe class="sketchfab-viewer" src="https://sketchfab.com/models/a36f4cfff56e4f7697aa5fb34bca1f69/embed" allowfullscreen></iframe>
+  <iframe class="sketchfab-viewer" src="https://sketchfab.com/models/08c2325218a34d9cbd68b88ae6180422/embed" allowfullscreen></iframe>
+  <iframe class="sketchfab-viewer" src="https://sketchfab.com/models/e3d5c4a2a6e94286904a352b6c15cf48/embed" allowfullscreen></iframe>
+  <iframe class="sketchfab-viewer" src="https://sketchfab.com/models/e313f32b8ef54efcaebd0f909b7dda6c/embed" allowfullscreen></iframe>
+</div>
+
+<!-- Gallery container (hidden by default) -->
+<div class="gallery-container" id="gallery-container" style="display: none;">
+  <button id="toggle-to-3d" class="close-gallery-btn">✖</button>
+  <div class="main-gallery">
+    <button id="prev-btn" class="arrow-btn">◀</button>
+    <img id="gallery-image" src="" alt="Model Photo" class="gallery-photo">
+    <button id="next-btn" class="arrow-btn">▶</button>
   </div>
+  <p id="image-counter" class="image-counter"></p>
+</div>
 
-  <div class="model-switcher">
-    <button onclick="showModel(0)">
-      <img src="icons/computer.png" alt="Model 1" class="model-icon">
-    </button>
-    <button onclick="showModel(1)">
-      <img src="icons/radio.png" alt="Model 2" class="model-icon">
-    </button>
-    <button onclick="showModel(2)">
-      <img src="icons/fridge.png" alt="Model 3" class="model-icon">
-    </button>
-    <button onclick="showModel(3)">
-      <img src="icons/treasure.png" alt="Model 4" class="model-icon">
-    </button>
-    <button onclick="showModel(4)">
-      <img src="icons/chair.png" alt="Model 5" class="model-icon">
-    </button>
-  </div>
+<!-- Thumbnails always visible under viewer -->
+<div class="thumbnail-row" id="thumbnail-row"></div>
 
-  <!-- 3D Model Viewers -->
-  <div class="viewer-container">
-    <iframe class="sketchfab-viewer active" src="https://sketchfab.com/models/b00fc24c019c4833aacc00ad86330e99/embed?ui_theme=dark" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
+<!-- Download button -->
+<div class="download-button">
+  <a href="models/computer-model.zip" download>Download 3D Model</a>
+  <button class="share-btn">Share 🔗</button>
+</div>
 
-    <iframe class="sketchfab-viewer" src="https://sketchfab.com/models/a36f4cfff56e4f7697aa5fb34bca1f69/embed" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
 
-    <iframe class="sketchfab-viewer" src="https://sketchfab.com/models/08c2325218a34d9cbd68b88ae6180422/embed" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
+<!-- Description -->
+<div class="model-description">
+  <h2>About This Model <button class="toggle-description">Hide Description</button></h2>
+  <p id="description-text">Your description here...</p>
+</div>
 
-    <iframe class="sketchfab-viewer" src="https://sketchfab.com/models/e3d5c4a2a6e94286904a352b6c15cf48/embed" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
-    
-    <iframe class="sketchfab-viewer" src="https://sketchfab.com/models/e313f32b8ef54efcaebd0f909b7dda6c/embed" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
-  </div>
-
-  <div class="model-description">
-    <h2>
-      About This Model
-      <button class="toggle-description">Hide Description</button>
-    </h2>
-    <p id="description-text">Your description here...</p>
-  </div>
-
-  <!-- Comment Section -->
+  <!-- Comment Section (unchanged) -->
   <div class="comment-section">
     <h2>Comments & Suggestions</h2>
     <button id="toggle-comments" class="toggle-button">Hide Comments</button>
-    
     <form id="comment-form">
       <div class="comment-input">
         <div class="avatar-circle" id="user-avatar">U</div>
@@ -87,7 +91,6 @@
         </div>
       </div>
     </form>
-
     <div id="comments-display" class="comments-list"></div>
   </div>
 
@@ -125,8 +128,19 @@
         desc.textContent = modelDescriptions[index];
         desc.style.opacity = 1;
       }, 200);
-    }
-    
+
+      // update download link
+  const downloadLink = document.querySelector('.download-button a');
+  const modelFiles = [
+    'models/computer-model.zip',
+    'models/radio-model.zip',
+    'models/fridge-model.zip',
+    'models/treasure-model.zip',
+    'models/chair-model.zip'
+  ];
+  downloadLink.href = modelFiles[index];
+}
+
     showModel(0); // Default view
     
     // Toggle description
@@ -176,7 +190,7 @@
       }
     });
     
-    // Forbidden words list
+    // Forbidden words list (This Contains Curse words this is intended to block words for being use in the comment section)
     const forbiddenWords = ['nigga', 'nigger', 'Nigga', 'Nigger', 'fuck', 'Fuck', ' fuck you', 'Fuck you', 'FUCK YOU', 'FUCK U','fuck you','fuck u' , 'FUCKER', 'Fucker' ,'FUCKING', 'Fucking','shit','SHIT','gay','GAY', 'G@Y', 'g@y', 'Fag','FAG', 'Faggot', 'FAGGOT', 'Kill', 'KILL', 'Hitler', 'HITLER', '666', 'Hate','HATE', 'Hate you', 'HATE YOU', 'Chink', 'CHINK', 'ISIS', 'isis']; // replace with real words
     
     // Add comment
@@ -196,7 +210,6 @@
     
       if (containsBadWord) {
         alert('Your comment contains inappropriate language. Please revise it.');
-        return;
       }
     
       if (name && text) {
@@ -264,8 +277,119 @@
       commentBox.appendChild(content);
       commentList.appendChild(commentBox);
     }
-    </script>
+
     
+  // For the gallery viewer 
+  const galleryImages = [
+  ['gallery/computer/front2.1.png', 'gallery/computer/back1.1.png', 'gallery/computer/closeup.png', 'gallery/computer/closeup1.png'],
+  ['gallery/radio/editfinal1.png', 'gallery/radio/editfinal2.png', 'gallery/radio/editfinal3.png', 'gallery/radio/editfinal4.png'],
+  ['gallery/fridge/fridgefinal1.png', 'gallery/fridge/fridgefinal2.png', 'gallery/fridge/fridgefinal3.png', 'gallery/fridge/fridgefinal4.png'],
+  ['gallery/chest/chestfinalrender1.png', 'gallery/chest/chestfinalrender2.png', 'gallery/chest/chestfinalrender3.png', 'gallery/chest/chestfinalrender4.png'],
+  ['gallery/chair/chairrender1.png', 'gallery/chair/chairrender2.png', 'gallery/chair/chairrender3.png'],
+];
+
+let currentModelIndex = 0;
+let currentImageIndex = 0;
+
+const viewerContainer = document.getElementById('viewer-container');
+const galleryContainer = document.getElementById('gallery-container');
+const galleryImage = document.getElementById('gallery-image');
+const imageCounter = document.getElementById('image-counter');
+const thumbnailRow = document.getElementById('thumbnail-row');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const closeGalleryBtn = document.getElementById('toggle-to-3d'); // X button
+
+// ✅ SWITCH BACK TO 3D
+closeGalleryBtn.addEventListener('click', () => {
+  galleryContainer.style.display = 'none';
+  viewerContainer.style.display = 'block';
+});
+
+// ✅ PREVIOUS & NEXT
+prevBtn.addEventListener('click', () => {
+  if (currentImageIndex > 0) {
+    currentImageIndex--;
+    updateGalleryDisplay();
+  }
+});
+nextBtn.addEventListener('click', () => {
+  if (currentImageIndex < galleryImages[currentModelIndex].length - 1) {
+    currentImageIndex++;
+    updateGalleryDisplay();
+  }
+});
+
+// ✅ LOAD THUMBNAILS → clicking switches view
+function loadThumbnails() {
+  thumbnailRow.innerHTML = '';
+  const imageList = galleryImages[currentModelIndex];
+  imageList.forEach((src, idx) => {
+    const thumb = document.createElement('img');
+    thumb.src = src;
+    thumb.addEventListener('click', () => {
+      currentImageIndex = idx;
+      updateGalleryDisplay();
+      viewerContainer.style.display = 'none';
+      galleryContainer.style.display = 'block';
+    });
+    thumbnailRow.appendChild(thumb);
+  });
+}
+
+function updateGalleryDisplay() {
+  const imageList = galleryImages[currentModelIndex];
+  galleryImage.src = imageList[currentImageIndex];
+  imageCounter.textContent = `${currentImageIndex + 1} of ${imageList.length}`;
+}
+
+const originalShowModel = showModel;
+showModel = function(index) {
+  originalShowModel(index);
+  currentModelIndex = index;
+  currentImageIndex = 0;
+  loadThumbnails();
+  updateGalleryDisplay();
+};
+
+showModel(0);
+
+const shareButton = document.querySelector('.share-btn');
+if (shareButton) {
+  shareButton.addEventListener('click', () => {
+    const modelLinks = [
+      'https://sketchfab.com/models/b00fc24c019c4833aacc00ad86330e99',
+      'https://sketchfab.com/models/a36f4cfff56e4f7697aa5fb34bca1f69',
+      'https://sketchfab.com/models/08c2325218a34d9cbd68b88ae6180422',
+      'https://sketchfab.com/models/e3d5c4a2a6e94286904a352b6c15cf48',
+      'https://sketchfab.com/models/e313f32b8ef54efcaebd0f909b7dda6c'
+    ];
+
+    const currentLink = modelLinks[currentModelIndex];
+
+    if (navigator.share) {
+      navigator.share({
+        title: 'Check out this 3D Model!',
+        url: currentLink
+      }).then(() => {
+        console.log('Shared successfully');
+      }).catch(console.error);
+    } else {
+      navigator.clipboard.writeText(currentLink);
+      alert('Model link copied to clipboard!');
+    }
+  });
+}
+
+
+
+
+
+
+
+
+
+</script>
+
 </body>
 </html>
-
